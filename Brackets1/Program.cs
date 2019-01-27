@@ -8,9 +8,14 @@ using System.Threading.Tasks;
 namespace Brackets1
 {
     /**
-     * Brackets:
-     * 1. Players must be able to divide into teams of eight
-     *    for each bracket competition.
+     * BRACKETS
+     * This is bowling program to randomly seed players with scores
+     * into a bracket championship. It then places them based upon 
+     * their scores into a bracket. The scores are read from a file.
+     * Requirement: Players must be in multiples of eight to properly
+     * divide into each game.
+     * author: Nelson_Nyland
+     * version: 0.2
      */
     public static class Program
     {
@@ -35,14 +40,13 @@ namespace Brackets1
             Open();
 
             if (IsDivisibleByEight())
-            {
-                Console.Write("How many brackets would you like? ");
-                int count = Convert.ToInt32(Console.ReadLine());
-                BracketCount = 1;
-                for (int i = 0; i < count; i++)
+            {                
+                char input = 'y';
+                while (input != 'n')
                 {
-                    Execute();
                     ++BracketCount;
+                    Execute();
+                    input = getInput();
                 }
             }
             else
@@ -54,6 +58,12 @@ namespace Brackets1
             Console.WriteLine();
             Console.WriteLine("Press any key to continue...");
             Console.ReadKey();
+        }
+
+        private static char getInput()
+        {            
+            Console.Write("Would you like to continue(Y/N)? ");
+            return Char.ToLower(Convert.ToChar(Console.ReadLine()));
         }
 
         private static void Execute()
